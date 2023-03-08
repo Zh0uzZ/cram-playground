@@ -1,0 +1,22 @@
+{
+    "name": "cram-playground",
+    "image": "01xz/spinalhdl-dev:riscv",
+    "settings": {},
+    "extensions": [
+        "eirikpre.systemverilog",
+        "ms-vscode.cpptools",
+    ],
+    "mounts": [],
+    "runArgs": [
+        "-h",
+        "cram-playground",
+        "--name",
+        "cram-playground",
+        "-v",
+        "/etc/timezone:/etc/timezone:ro",
+        "-v",
+        "/etc/localtime:/etc/localtime:ro"
+    ],
+    "remoteUser": "vscode",
+    "postCreateCommand": "echo \"source ${containerWorkspaceFolder}/.devcontainer/setup.sh\" >> /home/vscode/.bashrc"
+}
