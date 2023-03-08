@@ -1,4 +1,3 @@
-#include <stdbool.h>
 #include <verilated.h>
 
 // from the module name: hw -> Vhw.h
