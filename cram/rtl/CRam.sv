@@ -125,12 +125,26 @@ module CRam #(
     end
   end
 
+  logic [31:0] inst_d;
+  logic [31:0] inst_q;
+
+  assign inst_d = inst_i;
+
+  // instruction register
+  always_ff @(posedge clk_i or negedge rst_ni) begin
+    if (!rst_ni) begin
+      inst_q <= {32{1'b0}};
+    end else begin
+      inst_q <= inst_d;
+    end
+  end
+
   // instruction
-  logic [3:0] enable = inst_i[31:28];
-  logic [3:0] opcode = inst_i[27:24];
-  logic [7:0] addr_a = inst_i[23:16];
-  logic [7:0] addr_b = inst_i[15: 8];
-  logic [7:0] addr_d = inst_i[ 7: 0];
+  logic [3:0] enable = inst_q[31:28];
+  logic [3:0] opcode = inst_q[27:24];
+  logic [7:0] addr_a = inst_q[23:16];
+  logic [7:0] addr_b = inst_q[15: 8];
+  logic [7:0] addr_d = inst_q[ 7: 0];
 
   // features
   logic instr_enable, tag_enable;
