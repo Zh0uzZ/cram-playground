@@ -46,6 +46,14 @@ void cram_inst(OP_TYPE opcode, uint32_t ra, uint32_t rb, uint32_t rd, bool tag_e
   event_record(CLK_CYCLE_TIME);
 }
 
+void cram_inst_empty(void) {
+  top->we_i = SRAM_WRITE_DISABLE;
+  top->addr_i = EMPTY_ADDR;
+  top->data_i = EMPTY_DATA;
+  top->inst_i = INST_DISABLE;
+  event_record(CLK_CYCLE_TIME);
+}
+
 void __inst_logic(OP_TYPE opcode, uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
   if ((uint32_t)opcode <= (uint32_t)XNOR) {
     for (uint32_t i = 0; i < size; i++) {

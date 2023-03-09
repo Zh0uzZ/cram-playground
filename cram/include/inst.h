@@ -50,6 +50,7 @@ void sram_write(uint32_t addr, uint32_t data);
 
 // single-cycle instruction
 void cram_inst(OP_TYPE opcode, uint32_t ra, uint32_t rb, uint32_t rd, bool tag_enable);
+void cram_inst_empty(void);
 
 // multi-cycle instrutions
 // logic:
