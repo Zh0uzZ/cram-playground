@@ -46,7 +46,7 @@ void cram_inst(OP_TYPE opcode, uint32_t ra, uint32_t rb, uint32_t rd, bool tag_e
   event_record(CLK_CYCLE_TIME);
 }
 
-void __inst_logic (OP_TYPE opcode, uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
+void __inst_logic(OP_TYPE opcode, uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
   if ((uint32_t)opcode <= (uint32_t)XNOR) {
     for (uint32_t i = 0; i < size; i++) {
       cram_inst(opcode, (ra + i), (rb + i), (rd + i), false);
@@ -56,22 +56,22 @@ void __inst_logic (OP_TYPE opcode, uint32_t ra, uint32_t rb, uint32_t rd, uint32
   }
 }
 
-void inst_and (uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
+void inst_and(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
   __inst_logic(AND, ra, rb, rd, size);
 }
 
-void inst_nor (uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
+void inst_nor(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
   __inst_logic(NOR, ra, rb, rd, size);
 }
-void inst_xor (uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
+void inst_xor(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
   __inst_logic(XOR, ra, rb, rd, size);
 }
-void inst_nand (uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
+void inst_nand(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
   __inst_logic(NAND, ra, rb, rd, size);
 }
-void inst_or (uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
+void inst_or(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
   __inst_logic(OR, ra, rb, rd, size);
 }
-void inst_xnor (uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
+void inst_xnor(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
   __inst_logic(XNOR, ra, rb, rd, size);
 }
