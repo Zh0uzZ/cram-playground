@@ -33,6 +33,8 @@ extern "C" {
 #define RB_MASK RANGE_TO_MASK(RB_RANGE)
 #define RD_MASK RANGE_TO_MASK(RD_RANGE)
 
+#define UNUSED 0
+
 typedef enum {
   // logic
   AND, OR, XOR, NAND, NOR, XNOR,
