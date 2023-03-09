@@ -77,7 +77,7 @@ int main(int argc, char* argv[], char* env[]) {
   // sub
   inst_sub(ra += step, rb += step, rd += step, step);
   cram_inst_empty();
-  show_norm_mem_all("integer add:");
+  show_norm_mem_all("integer sub:");
 
   // check if all 0xa055fa9b
   for (int i = 256; i < 384; i++) {
