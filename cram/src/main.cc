@@ -32,11 +32,8 @@ extern "C" void set_tag_ptr(const svOpenArrayHandle var) {
   tag_ptr = (uint32_t*)(((VerilatedDpiOpenVar*)var)->datap());
 }
 
-// top
 VerilatedContext* contextp = new VerilatedContext;
 VCRam* top = new VCRam{contextp};
-
-// trace
 VerilatedVcdC* tfp = new VerilatedVcdC;
 
 int main(int argc, char* argv[], char* env[]) {
@@ -53,7 +50,7 @@ int main(int argc, char* argv[], char* env[]) {
   // initialization
   init();
 
-  // tests:
+  // test cases:
   uint32_t ra = 0, rb = 32, rd = 64, step = 4;
   // logic
   // and
