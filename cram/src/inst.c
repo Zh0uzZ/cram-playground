@@ -75,3 +75,10 @@ void inst_or(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
 void inst_xnor(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
   __inst_logic(XNOR, ra, rb, rd, size);
 }
+
+void inst_add(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
+  cram_inst(CC, 0, 0, 0, false);
+  for (int32_t i = (size - 1); i >= 0; i--) {
+    cram_inst(ADD, (ra + i), (rb + i), (rd + i), false);
+  }
+}

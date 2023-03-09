@@ -60,7 +60,7 @@ void inst_nand(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size);
 void inst_or  (uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size);
 void inst_xnor(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size);
 // integer:
-// void inst_add(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size);
+void inst_add(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size);
 // void inst_sub(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size);
 // void inst_mul(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size);
 // void inst_div(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size);
