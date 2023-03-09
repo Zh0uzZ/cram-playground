@@ -71,15 +71,19 @@ void inst_and(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
 void inst_nor(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
   __inst_logic(NOR, ra, rb, rd, size);
 }
+
 void inst_xor(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
   __inst_logic(XOR, ra, rb, rd, size);
 }
+
 void inst_nand(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
   __inst_logic(NAND, ra, rb, rd, size);
 }
+
 void inst_or(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
   __inst_logic(OR, ra, rb, rd, size);
 }
+
 void inst_xnor(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
   __inst_logic(XNOR, ra, rb, rd, size);
 }
