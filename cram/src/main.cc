@@ -77,10 +77,15 @@ int main(int argc, char* argv[], char* env[]) {
   // sub
   inst_sub(ra += step, rb += step, rd += step, step);
   show_norm_mem_all("integer sub:");
+  // mul
+  inst_mul(ra += step, rb += step, rd += step, 32);
+  show_norm_mem_all("integer mul:");
 
-  // check if all 0xa055fa9b
+  // check if all correct
   for (int i = 256; i < 384; i++) {
-    assert(norm_mem_ptr[i] == 0xa055fa9b);
+    assert(norm_mem_ptr[i      ] == 0xa055fa9b);
+    assert(norm_mem_ptr[i + 128] == 0x6e08cf1e);
+    assert(norm_mem_ptr[i + 256] == 0xa60b44f5);
   }
   printf("pass\n");
 
