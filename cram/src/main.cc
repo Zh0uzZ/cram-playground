@@ -43,8 +43,8 @@ int main(int argc, char* argv[], char* env[]) {
   if (false && argc && argv && env) {
   }
 
-  // enable trace, save vcd file to build/CRamSim.vcd
-  enable_trace_to("build/SimCRam.vcd");
+  // enable trace, save vcd file to build/main.vcd
+  enable_trace_to("build/main.vcd");
 
   // set values for a range of memory
   set_norm_mem_range(0, 128, 0xfafafafa);
