@@ -1,4 +1,5 @@
 #include "inst.h"
+#include "debug.h"
 
 extern VerilatedContext *contextp;
 extern VCRam *top;
@@ -104,6 +105,35 @@ void inst_sub(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
   }
   for (int32_t i = (size - 1); i >= 0; i--) {
     cram_inst(ADD, (ra + i), (rd + i), (rd + i), false);
+  }
+  cram_inst_empty();
+}
+
+void inst_mul(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
+  // initialization
+  cram_inst(CC, UNUSED, UNUSED, UNUSED, false);
+  for (int32_t i = (2 * size - 1); i >= 0; i--) {
+    cram_inst(STC, UNUSED, UNUSED, (rd + i), false);
+  }
+  for (int32_t i = (size - 1); i >= 0; i--) {
+    cram_inst(LDT, (rb + i), UNUSED, UNUSED, false);
+    for (int32_t j = (size - 1); j >= 0; j--) {
+      if (i == (size - 1)) {
+        // conditional copy
+        cram_inst(CPY, (ra + j), UNUSED, (rd + i + j + 1), true);
+      } else {
+        // conditional add
+        cram_inst(ADD, (ra + j), (rd + i + j + 1), (rd + i + j + 1), true);
+      }
+    }
+    // conditional store c
+    if (i < (size - 1)) {
+      cram_inst(STC, UNUSED, UNUSED, (rd + i), true);
+      if (i > 0) {
+        // clear c
+        cram_inst(CC, UNUSED, UNUSED, UNUSED, false);
+      }
+    }
   }
   cram_inst_empty();
 }
