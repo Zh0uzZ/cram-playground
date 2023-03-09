@@ -13,6 +13,26 @@ extern "C" {
 #include "common.h"
 #include "utils.h"
 
+#define ADDR_RANGE 10
+#define DATA_RANGE 32
+
+#define TAG_OFFSET 28
+#define OP_OFFSET  24
+#define RA_OFFSET  16
+#define RB_OFFSET  8
+#define RD_OFFSET  0
+
+#define OP_RANGE 4
+#define RA_RANGE 8
+#define RB_RANGE 8
+#define RD_RANGE 8
+
+#define RANGE_TO_MASK(RANGE) ((1 << RANGE) - 1)
+#define OP_MASK RANGE_TO_MASK(OP_RANGE)
+#define RA_MASK RANGE_TO_MASK(RA_RANGE)
+#define RB_MASK RANGE_TO_MASK(RB_RANGE)
+#define RD_MASK RANGE_TO_MASK(RD_RANGE)
+
 typedef enum {
   // logic
   AND, OR, XOR, NAND, NOR, XNOR,
@@ -23,7 +43,7 @@ typedef enum {
   // comparison
   EQU,
   // utility
-  LDT, STC, STT, SC, CC, C2T = 0xf
+  LDT, STC, STT, SC, CC, C2T = OP_MASK
 } OP_TYPE;
 
 void sram_write(uint32_t addr, uint32_t data);
