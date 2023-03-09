@@ -59,6 +59,7 @@ void __inst_logic(OP_TYPE opcode, uint32_t ra, uint32_t rb, uint32_t rd, uint32_
     for (uint32_t i = 0; i < size; i++) {
       cram_inst(opcode, (ra + i), (rb + i), (rd + i), false);
     }
+    cram_inst_empty();
   } else {
     printf("Error: not a logic instruction\n");
   }
@@ -93,6 +94,7 @@ void inst_add(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
   for (int32_t i = (size - 1); i >= 0; i--) {
     cram_inst(ADD, (ra + i), (rb + i), (rd + i), false);
   }
+  cram_inst_empty();
 }
 
 void inst_sub(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
@@ -103,4 +105,5 @@ void inst_sub(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
   for (int32_t i = (size - 1); i >= 0; i--) {
     cram_inst(ADD, (ra + i), (rd + i), (rd + i), false);
   }
+  cram_inst_empty();
 }
