@@ -22,7 +22,7 @@ extern "C" {
 #define RESET_TIME      20
 #define RESET_ENABLE    0
 #define RESET_DISABLE   1
-#define WAIT_TIME       (RESET_TIME + CLK_FLIP_TIME)
+#define WAIT_TIME       (RESET_TIME + CLK_FLIP_TIME + 2)
 
 #define SRAM_WRITE_ENABLE  1
 #define SRAM_WRITE_DISABLE 0
