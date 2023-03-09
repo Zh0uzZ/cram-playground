@@ -1,5 +1,4 @@
 #include "inst.h"
-#include "debug.h"
 
 extern VerilatedContext *contextp;
 extern VCRam *top;
