@@ -14,7 +14,7 @@ extern "C" {
 
 void enable_trace_to(const char* path);
 void finish();
-void init(uint64_t wait_time);
+void init();
 void event_record(uint64_t event_time);
 
 #ifdef __cplusplus

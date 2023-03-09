@@ -51,7 +51,7 @@ int main(int argc, char* argv[], char* env[]) {
   set_norm_mem_range(128, 256, 0xafafafaf);
 
   // initialization
-  init(25);
+  init();
 
   // tests:
   uint32_t ra = 0, rb = 32, rd = 64, step = 4;

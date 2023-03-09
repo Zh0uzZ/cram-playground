@@ -7,9 +7,9 @@ extern VerilatedVcdC *tfp;
 bool __is_in_range(uint32_t val, int num_bits) { return (val >> num_bits) == 0; }
 
 void __sram_write(uint32_t addr, uint32_t data) {
-  if (__is_in_range(addr, 10) && __is_in_range(data, 32)) {
-    top->we_i = 1;
-    top->inst_i = 0;
+  if (__is_in_range(addr, ADDR_RANGE) && __is_in_range(data, DATA_RANGE)) {
+    top->we_i = SRAM_WRITE_ENABLE;
+    top->inst_i = INST_DISABLE;
     top->addr_i = addr;
     top->data_i = data;
   } else {
@@ -19,22 +19,22 @@ void __sram_write(uint32_t addr, uint32_t data) {
 
 void sram_write(uint32_t addr, uint32_t data) {
   __sram_write(addr, data);
-  event_record(10);
+  event_record(CLK_CYCLE_TIME);
 }
 
 uint32_t __cram_inst_gen(OP_TYPE opcode, uint32_t ra, uint32_t rb, uint32_t rd, bool tag_enable) {
-  uint32_t result = tag_enable ? 0x90000000 : 0x80000000;
-  result |= ((uint32_t)opcode & 0xF) << 24;
-  result |= (ra & 0xFF) << 16;
-  result |= (rb & 0xFF) << 8;
-  result |= (rd & 0xFF);
+  uint32_t result = tag_enable ? INST_ENABLE | ((uint32_t)tag_enable << TAG_OFFSET) : INST_ENABLE;
+  result |= ((uint32_t)opcode & OP_MASK) << OP_OFFSET;
+  result |= (ra & RA_MASK) << RA_OFFSET;
+  result |= (rb & RB_MASK) << RB_OFFSET;
+  result |= (rd & RD_MASK) << RD_OFFSET;
   return result;
 }
 
 void __cram_inst(OP_TYPE opcode, uint32_t ra, uint32_t rb, uint32_t rd, bool tag_enable) {
-  if (__is_in_range(ra, 8) && __is_in_range(rb, 8) && __is_in_range(rd, 8)) {
-    top->we_i = 0;
-    top->data_i = 0;
+  if (__is_in_range(ra, RA_RANGE) && __is_in_range(rb, RB_RANGE) && __is_in_range(rd, RD_RANGE)) {
+    top->we_i = SRAM_WRITE_DISABLE;
+    top->data_i = EMPTY_DATA;
     top->inst_i = __cram_inst_gen(opcode, ra, rb, rd, tag_enable);
   } else {
     printf("Error: one or more addrs are out of range\n");
@@ -43,7 +43,7 @@ void __cram_inst(OP_TYPE opcode, uint32_t ra, uint32_t rb, uint32_t rd, bool tag
 
 void cram_inst(OP_TYPE opcode, uint32_t ra, uint32_t rb, uint32_t rd, bool tag_enable) {
   __cram_inst(opcode, ra, rb, rd, tag_enable);
-  event_record(10);
+  event_record(CLK_CYCLE_TIME);
 }
 
 void __inst_logic (OP_TYPE opcode, uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
