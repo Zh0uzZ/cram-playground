@@ -71,10 +71,17 @@ int main(int argc, char* argv[], char* env[]) {
   // xnor
   inst_xnor(ra += step, rb += step, rd += step, step);
   show_norm_mem_all("logic xnor:");
+  // add
+  inst_add(ra += step, rb += step, rd += step, step);
+  show_norm_mem_all("integer add:");
+  // sub
+  inst_sub(ra += step, rb += step, rd += step, step);
+  cram_inst_empty();
+  show_norm_mem_all("integer add:");
 
-  // check if all 0xa055fa00
+  // check if all 0xa055fa9b
   for (int i = 256; i < 384; i++) {
-    assert(norm_mem_ptr[i] == 0xa055fa00);
+    assert(norm_mem_ptr[i] == 0xa055fa9b);
   }
   printf("pass\n");
 
