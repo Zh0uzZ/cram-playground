@@ -125,8 +125,8 @@ void inst_mul(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size) {
         cram_inst(ADD, (ra + j), (rd + i + j + 1), (rd + i + j + 1), true);
       }
     }
-    // conditional store c
     if (i < (size - 1)) {
+      // conditional store c
       cram_inst(STC, UNUSED, UNUSED, (rd + i), true);
       if (i > 0) {
         // clear c
