@@ -1,11 +1,15 @@
 {
     "name": "cram-playground",
     "image": "01xz/spinalhdl-dev:riscv",
-    "settings": {},
-    "extensions": [
-        "eirikpre.systemverilog",
-        "ms-vscode.cpptools",
-    ],
+    "customizations": {
+        "vscode": {
+            "settings": {},
+            "extensions": [
+                "eirikpre.systemverilog",
+                "ms-vscode.cpptools",
+            ]
+        }
+    },
     "mounts": [],
     "runArgs": [
         "-h",
