@@ -27,7 +27,7 @@ void __event_record(uint64_t reset_time, uint64_t wait_time) {
       top->rst_ni = RESET_DISABLE;
     }
     if (contextp->time() % CLK_FLIP_TIME == 0) {
-      top->clk_i = (top->clk_i == CLK_LEVEL_HIGH ? CLK_LEVEL_LOW : CLK_LEVEL_HIGH);
+      top->clk_i ^= CLK_LEVEL_HIGH;
     }
     top->eval();
     tfp->dump(contextp->time());
