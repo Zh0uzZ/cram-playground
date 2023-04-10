@@ -5,6 +5,7 @@
         "vscode": {
             "settings": {},
             "extensions": [
+                "eamodio.gitlens",
                 "eirikpre.systemverilog",
                 "ms-vscode.cpptools",
             ]
