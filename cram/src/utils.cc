@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "utils.hh"
 
 extern VerilatedContext *contextp;
 extern VCRam *top;

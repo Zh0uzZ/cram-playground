@@ -1,4 +1,4 @@
-#include "debug.h"
+#include "debug.hh"
 
 extern uint32_t* norm_mem_ptr;
 extern uint32_t* init_mem_ptr;

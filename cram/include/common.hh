@@ -1,5 +1,5 @@
-#ifndef __COMMON_H
-#define __COMMON_H
+#ifndef __COMMON_HH__
+#define __COMMON_HH__
 
 #ifdef __cplusplus
 extern "C" {
@@ -9,6 +9,10 @@ extern "C" {
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
+
+#ifdef __cplusplus
+}
+#endif
 
 #define ROW      128
 #define COL      256
@@ -30,9 +34,5 @@ extern "C" {
 #define EMPTY_DATA         0
 #define INST_ENABLE        0x80000000
 #define INST_DISABLE       0
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

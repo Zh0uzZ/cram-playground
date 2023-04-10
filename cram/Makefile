@@ -30,7 +30,7 @@ LDFLAGS ?=
 $(VCD): $(EXE)
 	@$^
 
-$(EXE): $(RTL_DIR)/$(TOP_MODULE).sv $(SRC_DIR)/*.cc $(SRC_DIR)/*.c
+$(EXE): $(RTL_DIR)/$(TOP_MODULE).sv $(SRC_DIR)/*.cc
 	$(VERILATOR) $(VERILATOR_FLAGS) --trace \
 		$(addprefix -CFLAGS , $(CFLAGS)) $(addprefix -LDFLAGS , $(LDFLAGS)) \
 		-o $(abspath $@) --top $(TOP_MODULE) $^

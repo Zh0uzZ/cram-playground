@@ -1,11 +1,7 @@
-#ifndef __DEBUG_H
-#define __DEBUG_H
+#ifndef __DEBUG_HH__
+#define __DEBUG_HH__
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include "common.h"
+#include "common.hh"
 
 void show_norm_mem_addr(int addr, bool print_line);
 void show_norm_mem_range(int from_addr, int to_addr, bool show_carry, bool show_tag);
@@ -17,9 +13,5 @@ void set_norm_mem_all(uint32_t value);
 
 void show_carry(void);
 void show_tag(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

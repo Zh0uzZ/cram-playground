@@ -1,4 +1,4 @@
-#include "inst.h"
+#include "inst.hh"
 
 extern VerilatedContext *contextp;
 extern VCRam *top;

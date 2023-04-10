@@ -1,17 +1,13 @@
-#ifndef __INST_H
-#define __INST_H
+#ifndef __INST_HH__
+#define __INST_HH__
 
 #include <verilated.h>
 #include <verilated_vcd_c.h>
 
 #include "VCRam.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include "common.h"
-#include "utils.h"
+#include "common.hh"
+#include "utils.hh"
 
 #define ADDR_RANGE 10
 #define DATA_RANGE 32
@@ -72,9 +68,5 @@ void inst_mul(uint32_t ra, uint32_t rb, uint32_t rd, uint32_t size);
 
 // comparison:
 // TODO
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

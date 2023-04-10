@@ -5,10 +5,10 @@
 #include "VCRam.h"
 #include "VCRam__Dpi.h"
 
-#include "common.h"
-#include "debug.h"
-#include "inst.h"
-#include "utils.h"
+#include "common.hh"
+#include "debug.hh"
+#include "inst.hh"
+#include "utils.hh"
 
 // DPI-C related
 uint32_t* norm_mem_ptr = NULL;
