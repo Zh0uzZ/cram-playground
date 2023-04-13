@@ -19,8 +19,9 @@ EXE = $(BUILD_DIR)/$(TARGET)
 
 sim: $(VCD) $(EXE)
 
-VERILATOR_FLAGS += -cc --exe -sv --build
-VERILATOR_FLAGS += -Wall -Wno-lint
+VERILATOR_FLAGS += --cc --sv --trace --build --exe
+VERILATOR_FLAGS += -Wall -Wno-fatal
+VERILATOR_FLAGS += --top $(TOP_MODULE)
 VERILATOR_FLAGS += --Mdir $(BUILD_DIR)
 
 INCFLAGS = $(addprefix -I, $(abspath $(INC_DIR)))
@@ -31,9 +32,9 @@ $(VCD): $(EXE)
 	@$^
 
 $(EXE): $(RTL_DIR)/$(TOP_MODULE).sv $(SRC_DIR)/*.cc
-	$(VERILATOR) $(VERILATOR_FLAGS) --trace \
+	$(VERILATOR) $(VERILATOR_FLAGS) \
 		$(addprefix -CFLAGS , $(CFLAGS)) $(addprefix -LDFLAGS , $(LDFLAGS)) \
-		-o $(abspath $@) --top $(TOP_MODULE) $^
+		-o $(abspath $@) $^
 
 clean:
 	-rm -rf $(BUILD_DIR)
