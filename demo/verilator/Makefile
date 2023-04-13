@@ -5,31 +5,35 @@ export VERILATOR_ROOT
 VERILATOR = $(VERILATOR_ROOT)/bin/verilator
 endif
 
-TARGET_LIST ?= hw
+TARGET ?= sim
 
-INC_PATH ?=
+TOP_MODULE ?= hw
 
-CSRC_DIR ?= csrc
-VSRC_DIR ?= vsrc
-OBJ_DIR  ?= obj_dir
+INC_DIR   = csrc
+SRC_DIR   = csrc
+RTL_DIR   = vsrc
+BUILD_DIR = build
 
-VERILATOR_FLAGS += -cc --exe -sv --build
-VERILATOR_FLAGS += -Wall -Wno-lint
-VERILATOR_FLAGS += --Mdir $(OBJ_DIR)
-
-INCFLAGS = $(addprefix -I, $(INC_PATH))
-CFLAGS  += $(INCFLAGS)
-
-EXE ?= $(foreach target, $(TARGET_LIST), $(OBJ_DIR)/V$(target))
-
-.PHONY: sim clean
+EXE = $(BUILD_DIR)/$(TARGET)
 
 sim: $(EXE)
-	./$<
+	@$^
 
-$(OBJ_DIR)/V%: $(VSRC_DIR)/%.v $(CSRC_DIR)/sim.cc
-	$(VERILATOR) $(VERILATOR_FLAGS) --trace \
-		-o $(abspath $@) --top $(*F) $^
+VERILATOR_FLAGS += --cc --build --exe
+VERILATOR_FLAGS += -Wall -Wno-fatal
+VERILATOR_FLAGS += --top $(TOP_MODULE)
+VERILATOR_FLAGS += --Mdir $(BUILD_DIR)
+
+INCFLAGS = $(addprefix -I, $(abspath $(INC_DIR)))
+CFLAGS  += $(INCFLAGS)
+LDFLAGS ?=
+
+$(EXE): $(RTL_DIR)/$(TOP_MODULE).v $(SRC_DIR)/*.cc
+	$(VERILATOR) $(VERILATOR_FLAGS) \
+		$(addprefix -CFLAGS , $(CFLAGS)) $(addprefix -LDFLAGS , $(LDFLAGS)) \
+		-o $(abspath $@) $^
 
 clean:
-	-rm -rf $(OBJ_DIR)
+	-rm -rf $(BUILD_DIR)
+
+.PHONY: sim clean
